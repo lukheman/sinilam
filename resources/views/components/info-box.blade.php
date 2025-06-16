@@ -5,12 +5,8 @@
     'variant' => 'primary',
 ])
 
-<div class="info-box">
-    <span class="info-box-icon text-bg-{{ $variant }} shadow-sm">
-        <i class="bi bi-{{ $icon ?? ''}}"></i>
-    </span>
-    <div class="info-box-content">
-        <span class="info-box-text">{{ $text ?? ''}}</span>
-        <span class="info-box-number"> {{ $number ?? ''}} </span>
-    </div>
+<div class="stat-card">
+    <div class="fs-5 fw-semibold">{{ $number ?? ''}}</div>
+    <div class="text-muted">{{ $text ?? ''}}</div>
+    <i class="bi bi-{{ $icon }} icon"></i>
 </div>

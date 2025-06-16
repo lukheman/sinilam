@@ -30,6 +30,16 @@ class Login extends Component
         }
     }
 
+    public function messages()
+    {
+        return [
+            'email.required' => 'Email harus diisi.',
+            'email.email' => 'Format email tidak valid.',
+            'email.exists' => 'Email tidak terdaftar.',
+            'password.required' => 'Password harus diisi.',
+        ];
+    }
+
 
     public function render()
     {

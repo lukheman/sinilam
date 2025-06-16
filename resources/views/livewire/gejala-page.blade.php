@@ -41,8 +41,8 @@
                         <td>{{ $item->nama }}</td>
                     <td class="text-end">
 
-                        <x-modal.trigger target="modal-form-gejala" variant="warning" icon="pencil" wire:click="edit({{ $item }})">Edit</x-modal.trigger>
-                        <x-button variant="danger" icon="trash" wire:click="delete({{ $item->id }})">Hapus</x-button>
+                        <x-modal.trigger target="modal-form-gejala" variant="primary" icon="pencil" wire:click="edit({{ $item }})"></x-modal.trigger>
+                        <x-button variant="danger" icon="trash" wire:click="delete({{ $item->id }})"></x-button>
 
 
                     </td>

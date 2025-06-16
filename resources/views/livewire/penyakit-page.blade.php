@@ -45,9 +45,9 @@
                         <td>{{ $item->nama }}</td>
                     <td class="text-end">
 
-                        <x-modal.trigger target="modal-form-penyakit" variant="info" icon="eye" wire:click="detail({{ $item }})">Detail</x-modal.trigger>
-                        <x-modal.trigger target="modal-form-penyakit" variant="warning" icon="pencil" wire:click="edit({{ $item }})" >Edit</x-modal.trigger>
-                        <x-button variant="danger" icon="trash" wire:click="delete({{ $item->id}})">Hapus</x-button>
+                        <x-modal.trigger target="modal-form-penyakit" variant="info" icon="eye" wire:click="detail({{ $item }})"></x-modal.trigger>
+                        <x-modal.trigger target="modal-form-penyakit" variant="primary" icon="pencil" wire:click="edit({{ $item }})" ></x-modal.trigger>
+                        <x-button variant="danger" icon="trash" wire:click="delete({{ $item->id}})"></x-button>
 
 
                     </td>

@@ -11,6 +11,8 @@
         'btn',
         $outline ? 'btn-outline-' . $variant : 'btn-' . $variant,
         'btn-' . $size,
+        'btn-material',
+        'ripple-btn',
         $class
     ])));
 @endphp
@@ -21,3 +23,4 @@
     @endif
     {{ $slot }}
 </button>
+

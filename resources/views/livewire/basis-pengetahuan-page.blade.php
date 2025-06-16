@@ -34,8 +34,8 @@
                                 <td> <x-badge variant="success">{{ $item->pivot->mb }}</x-badge></td>
                                 <td> <x-badge variant="warning">{{ $item->pivot->md }}</x-badge></td>
                                 <td class="text-end">
-            <x-button size="sm" variant="warning" icon="pencil" wire:click="editGejalaPenyakit({{ $item->id }})">Edit</x-button>
-                                    <x-button size="sm" variant="danger" icon="trash" wire:click="deleteGejalaPenyakit({{ $item->id }})">Hapus</x-button>
+            <x-button variant="primary" icon="pencil" wire:click="editGejalaPenyakit({{ $item->id }})"></x-button>
+                                    <x-button variant="danger" icon="trash" wire:click="deleteGejalaPenyakit({{ $item->id }})"></x-button>
                                 </td>
                             </tr>
                         @endforeach

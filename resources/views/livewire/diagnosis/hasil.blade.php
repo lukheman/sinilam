@@ -11,21 +11,21 @@
             <div class="mb-4">
                 <h6 class="text-secondary fw-medium">Tingkat Keyakinan:</h6>
                 <div class="progress" style="height: 28px; border-radius: 8px; background-color: #e9ecef;">
-                    <div class="progress-bar bg-success" role="progressbar" style="width: {{ $cf * 100 }}%; background-color: var(--primary); font-size: 1rem;" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">
+                    <div class="progress-bar bg-primary" role="progressbar" style="width: {{ $cf * 100 }}%; background-color: var(--primary); font-size: 1rem;" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">
                     {{ number_format($cf * 100, 2) }}%
                     </div>
                 </div>
             </div>
 
             <div class="mt-4">
-                <h6 class="text-success fw-medium">Deskripsi</h6>
+                <h6 class="text-primary fw-medium">Deskripsi</h6>
                 <p class="card-text text-justify" style="font-size: 0.95rem; color: var(--text);">
                     {{ $penyakit?->deskripsi }}
                 </p>
             </div>
 
             <div class="mt-4">
-                <h6 class="text-success fw-medium">Solusi</h6>
+                <h6 class="text-primary fw-medium">Solusi</h6>
                 <p class="card-text text-justify" style="font-size: 0.95rem; color: var(--text);">
                     {{ $penyakit?->solusi }}
                 </p>
