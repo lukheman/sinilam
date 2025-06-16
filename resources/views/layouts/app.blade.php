@@ -6,6 +6,9 @@
   <title>Material UI Style Admin Dashboard - Bootstrap 5</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+    <!-- Toastfy -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
   <style>
     :root {
       --primary: #1976D2;
@@ -353,5 +356,72 @@
       });
     });
   </script>
+
+    <!-- Toastfy -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+        <script>
+
+
+        document.addEventListener('livewire:initialized', () => {
+
+            Livewire.on('toast', ({ message, variant}) => {
+
+                const backgroundColors = {
+                    success: "#28a745",
+                    error: "#dc3545",
+                    warning: "#ffc107"
+                };
+
+
+                Toastify({
+                    text: event.detail.message,
+                    duration: 3000,
+                    close: true,
+                    gravity: "top", // `top` or `bottom`
+                    position: "right", // `left`, `center` or `right`
+                    stopOnFocus: true, // Prevents dismissing of toast on hover
+                    style: {
+                        background: backgroundColors[variant] || "#343a40",
+                    },
+                }).showToast();
+
+            });
+
+
+
+            Livewire.on('deleteConfirmation', ({ message }) => {
+
+                Swal.fire({
+                    title: message,
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Ya, Hapus"
+                }).then((result) => {
+                        if (result.isConfirmed) {
+                            Livewire.dispatch('deleteConfirmed');
+                        }
+                    });
+
+            });
+
+            Livewire.on('close-modal', ( {target} ) => {
+                const modalElement = document.getElementById(target);
+                const modal = bootstrap.Modal.getInstance(modalElement);
+                modal.hide();
+
+            });
+
+        });
+
+
+
+        </script>
+
+
 </body>
 </html>
