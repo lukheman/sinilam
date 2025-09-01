@@ -370,7 +370,7 @@
             Livewire.on('toast', ({ message, variant}) => {
 
                 const backgroundColors = {
-                    success: "#28a745",
+                    success: "#1976D2",
                     error: "#dc3545",
                     warning: "#ffc107"
                 };
@@ -384,7 +384,10 @@
                     position: "right", // `left`, `center` or `right`
                     stopOnFocus: true, // Prevents dismissing of toast on hover
                     style: {
-                        background: backgroundColors[variant] || "#343a40",
+                        background: "#ffffff",
+                        border: `2px solid ${backgroundColors[variant] || "#374151"}`,
+                        color: "#111827",
+                        borderRadius: "5px"
                     },
                 }).showToast();
 
