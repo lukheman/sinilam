@@ -34,7 +34,7 @@
                 <button class="btn btn-outline-primary" wire:click="updateCurrentCertaintyFactor(0.7)"> Cukup Yakin</button>
                 <button class="btn btn-outline-primary" wire:click="updateCurrentCertaintyFactor(0.5)"> Sedikit Yakin</button>
                 <button class="btn btn-outline-primary" wire:click="updateCurrentCertaintyFactor(0.3)"> Tidak Tahu</button>
-                <button class="btn btn-outline-primary" wire:click="updateCurrentCertaintyFactor(0)"> Sangat Yakin</button>
+                <button class="btn btn-outline-primary" wire:click="updateCurrentCertaintyFactor(0)">Tidak</button>
             </div>
                 @else
 
