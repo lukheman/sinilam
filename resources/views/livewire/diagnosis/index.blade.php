@@ -1,4 +1,4 @@
-<!-- Diagnosa Section -->
+<!-- diagnosis Section -->
 
 <div class="mt-5 row justify-content-center">
 

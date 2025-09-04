@@ -154,7 +154,7 @@
         }
         /* end untuk login page */
 
-        .diagnosa-section {
+        .diagnosis-section {
             padding: 80px 0;
             min-height: 100vh;
             display: flex;

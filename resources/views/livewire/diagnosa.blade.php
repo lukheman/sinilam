@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sinilam - Diagnosa Penyakit Tanaman</title>
+    <title>Sinilam - Diagnosis Penyakit Tanaman</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
@@ -99,17 +99,17 @@
                     <li class="nav-item"><a class="nav-link" href="#tentang">Tentang</a></li>
                     <li class="nav-item"><a class="nav-link" href="#gejala">Gejala</a></li>
                     <li class="nav-item"><a class="nav-link" href="#penyakit">Penyakit</a></li>
-                    <li class="nav-item"><a class="nav-link btn btn-primary ms-2" href="#diagnosa">Mulai Diagnosa</a></li>
+                    <li class="nav-item"><a class="nav-link btn btn-primary ms-2" href="#diagnosis">Mulai diagnosis</a></li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <!-- Diagnosa Section -->
-    <section class="diagnosa-section">
+    <!-- diagnosis Section -->
+    <section class="diagnosis-section">
         <div class="container">
-            <h2 class="section-title animate__fadeIn">Diagnosa Penyakit Tanaman</h2>
-            <div class="card animate__fadeIn" style="animation-delay: 0.3s;" x-data="diagnosaState">
+            <h2 class="section-title animate__fadeIn">Diagnosis Penyakit Tanaman</h2>
+            <div class="card animate__fadeIn" style="animation-delay: 0.3s;" x-data="diagnosisState">
                 <div x-show="!showResult">
                     <!-- Progress Bar -->
                     <div class="progress">
@@ -135,9 +135,9 @@
                 </div>
                 <!-- Result Display -->
                 <div x-show="showResult" class="result-card">
-                    <h3 class="animate__fadeIn">Hasil Diagnosa</h3>
+                    <h3 class="animate__fadeIn">Hasil Diagnosis</h3>
                     <p class="mt-3 animate__fadeIn" style="animation-delay: 0.3s;" x-text="diagnosisResult"></p>
-                    <a href="#" class="btn btn-primary mt-4 animate__fadeIn" style="animation-delay: 0.6s;" x-on:click="resetDiagnosis">Ulangi Diagnosa</a>
+                    <a href="#" class="btn btn-primary mt-4 animate__fadeIn" style="animation-delay: 0.6s;" x-on:click="resetDiagnosis">Ulangi Diagnosis</a>
                 </div>
             </div>
         </div>
@@ -154,7 +154,7 @@
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
     <script>
         document.addEventListener('alpine:init', () => {
-            Alpine.data('diagnosaState', () => ({
+            Alpine.data('diagnosisState', () => ({
                 symptoms: [
                     // Placeholder for Livewire data
                     { id: 1, nama: 'Bercak pada Daun' },
