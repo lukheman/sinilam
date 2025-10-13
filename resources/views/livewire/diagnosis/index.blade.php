@@ -29,12 +29,12 @@
 
             <!-- Confidence Level Buttons -->
             <div class="confidence-buttons d-flex flex-wrap justify-content-center">
-                <button class="btn btn-outline-primary" wire:click="updateCurrentCertaintyFactor(1)"> Sangat Yakin</button>
-                <button class="btn btn-outline-primary" wire:click="updateCurrentCertaintyFactor(0.8)"> Yakin</button>
-                <button class="btn btn-outline-primary" wire:click="updateCurrentCertaintyFactor(0.7)"> Cukup Yakin</button>
-                <button class="btn btn-outline-primary" wire:click="updateCurrentCertaintyFactor(0.5)"> Sedikit Yakin</button>
-                <button class="btn btn-outline-primary" wire:click="updateCurrentCertaintyFactor(0.3)"> Tidak Tahu</button>
-                <button class="btn btn-outline-primary" wire:click="updateCurrentCertaintyFactor(0)">Tidak</button>
+                <button class="btn btn-outline-primary" wire:click="updateCurrentCertaintyFactor(1)">100%</button>
+                <button class="btn btn-outline-primary" wire:click="updateCurrentCertaintyFactor(0.8)">80%</button>
+                <button class="btn btn-outline-primary" wire:click="updateCurrentCertaintyFactor(0.7)">70%</button>
+                <button class="btn btn-outline-primary" wire:click="updateCurrentCertaintyFactor(0.5)">50%</button>
+                <button class="btn btn-outline-primary" wire:click="updateCurrentCertaintyFactor(0.3)">30%</button>
+                <button class="btn btn-outline-primary" wire:click="updateCurrentCertaintyFactor(0)">0%</button>
             </div>
                 @else
 
