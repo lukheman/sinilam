@@ -12,9 +12,10 @@ class Penyakit extends Model
     protected $table = 'penyakit';
     protected $guarded = [];
 
-    public function gejala() {
+    public function gejala()
+    {
         return $this->belongsToMany(Gejala::class, 'basis_pengetahuan', 'id_penyakit', 'id_gejala')
-            ->withPivot(['mb', 'md']) ;
+            ->withPivot(['mb', 'md']);
         // mb = measure belif
         // md = measure disbelief
     }

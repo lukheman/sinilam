@@ -28,62 +28,93 @@ class PenyakitPage extends Component
 
     public string $formModalState = 'create';
 
-    #[Computed]
-    public function penyakit() {
-        return Penyakit::paginate(10);
+    public string $activeTab = 'penyakit';
+
+    public function setTab(string $tab): void
+    {
+        $this->activeTab = $tab;
+        $this->resetPage();
     }
 
     #[Computed]
-    public function modalTitle() {
-        if ($this->formModalState === 'create') return 'Tambah Data';
-        if ($this->formModalState === 'edit') return 'Edit Data';
-        if ($this->formModalState === 'detail') return 'Detail Data';
+    public function penyakit()
+    {
+        return Penyakit::where('tipe', 'penyakit')->paginate(10, ['*'], 'penyakitPage');
     }
 
-    public function clear() {
+    #[Computed]
+    public function hama()
+    {
+        return Penyakit::where('tipe', 'hama')->paginate(10, ['*'], 'hamaPage');
+    }
+
+    #[Computed]
+    public function modalTitle()
+    {
+        if ($this->formModalState === 'create')
+            return 'Tambah Data';
+        if ($this->formModalState === 'edit')
+            return 'Edit Data';
+        if ($this->formModalState === 'detail')
+            return 'Detail Data';
+    }
+
+    public function clear()
+    {
         $this->form->reset();
         $this->formModalState = 'create';
+
+        // Set tipe otomatis berdasarkan tab yang aktif
+        $this->form->tipe = $this->activeTab;
     }
 
-    public function detail($penyakit) {
+    public function detail($penyakit)
+    {
         $this->formModalState = 'detail';
 
         $this->form->nama = $penyakit['nama'];
         $this->form->kode = $penyakit['kode'];
+        $this->form->tipe = $penyakit['tipe'];
         $this->form->deskripsi = $penyakit['deskripsi'];
         $this->form->solusi = $penyakit['solusi'];
     }
 
-    public function save() {
+    public function save()
+    {
         $this->form->store();
         $this->dispatch('close-modal', target: 'modal-form-penyakit');
         $this->notifySuccess('Berhasil menambahkan penyakit baru');
     }
 
-    public function edit($penyakit) {
+    public function edit($penyakit)
+    {
         $this->formModalState = 'edit';
 
         $this->form->nama = $penyakit['nama'];
         $this->form->kode = $penyakit['kode'];
+        $this->form->tipe = $penyakit['tipe'];
         $this->form->deskripsi = $penyakit['deskripsi'];
         $this->form->solusi = $penyakit['solusi'];
 
         $this->form->penyakit = Penyakit::find($penyakit['id']);
     }
 
-    public function update() {
+    public function update()
+    {
         $this->form->update();
         $this->dispatch('close-modal', target: 'modal-form-penyakit');
         $this->notifySuccess('Berhasil memperbarui penyakit');
     }
 
-    public function delete($id) {
+    public function delete($id)
+    {
         $this->form->penyakit = Penyakit::find($id);
         $this->deleteConfirmation('Yakin untuk menghapus data penyakit ini ?');
     }
 
     #[On('deleteConfirmed')]
-    public function deleteConfirmed() {
+    public function deleteConfirmed()
+    {
         $this->notifySuccess("Berhasil menghapus penyakit: {$this->form->penyakit->kode} - {$this->form->penyakit->nama}");
         $this->form->delete();
     }

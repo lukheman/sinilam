@@ -1,67 +1,70 @@
-<!-- diagnosis Section -->
+<!-- Diagnosis Section -->
 
 <div class="mt-5 row justify-content-center">
 
-    <div class="col-6">
+    <div class="col-lg-8 col-md-10 col-12">
 
-    <div wire:show="showHasil">
+        <div wire:show="showHasil">
+            <livewire:diagnosis.hasil />
+        </div>
 
-        <livewire:diagnosis.hasil />
+        <div wire:show="!showHasil">
+            <x-card title="Diagnosis Penyakit Tanaman">
 
-    </div>
+                <p class="text-muted mb-4">
+                    <i class="fas fa-info-circle me-2"></i>
+                    Pilih tingkat keyakinan Anda untuk setiap gejala yang dialami tanaman.
+                    Anda tidak perlu mengisi semua gejala, cukup yang relevan saja.
+                </p>
 
-    <div wire:show="!showHasil">
-        <x-card title="Diagnosis">
-
-            <div class="mb-4">
-
-                    @if ($currentGejala)
-                <h5 class="card-title"><i class="fas fa-leaf me-2"></i> <span>{{ $currentGejala->nama }}</span></h5>
-                <p class="card-text">Seberapa yakin Anda bahwa tanaman Anda mengalami gejala ini?</p>
-                @error('currentCeraintyFactor')
-                <p class="text-danger">Pilih tingkat keyakinan terlebih dahulu untuk melanjutkan.</p>
+                @error('gejala')
+                    <div class="alert alert-danger" role="alert">
+                        <i class="fas fa-exclamation-triangle me-2"></i>{{ $message }}
+                    </div>
                 @enderror
 
-                    @endif
-            </div>
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th style="width: 5%">#</th>
+                                <th style="width: 10%">Kode</th>
+                                <th style="width: 40%">Gejala</th>
+                                <th style="width: 45%">Tingkat Keyakinan</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($this->gejala as $index => $item)
+                                <tr>
+                                    <td>{{ $index + 1 }}</td>
+                                    <td><span class="badge bg-secondary">{{ $item->kode }}</span></td>
+                                    <td>{{ $item->nama }}</td>
+                                    <td>
+                                        <select class="form-select form-select-sm"
+                                            wire:model="certaintyFactorUser.{{ $item->id }}">
+                                            @foreach ($certaintyOptions as $value => $label)
+                                                <option value="{{ $value }}">{{ $label }}</option>
+                                            @endforeach
+                                        </select>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
 
-                @if ($currentGejala)
+                <div class="d-flex justify-content-between mt-4">
+                    <button class="btn btn-outline-secondary" wire:click="resetDiagnosis">
+                        <i class="fas fa-redo me-2"></i>Reset
+                    </button>
+                    <button class="btn btn-primary" wire:click="startDiagnosis">
+                        <i class="fas fa-stethoscope me-2"></i>Mulai Diagnosis
+                    </button>
+                </div>
 
-            <!-- Confidence Level Buttons -->
-            <div class="confidence-buttons d-flex flex-wrap justify-content-center">
-                <button class="btn btn-outline-primary" wire:click="updateCurrentCertaintyFactor(1)">Sangat Yakin (100 %)</button>
-                <button class="btn btn-outline-primary" wire:click="updateCurrentCertaintyFactor(0.8)">Yakin (80 %)</button>
-                <button class="btn btn-outline-primary" wire:click="updateCurrentCertaintyFactor(0.7)">Cukup Yakin (70 %)</button>
-                <button class="btn btn-outline-primary" wire:click="updateCurrentCertaintyFactor(0.5)">Sedikit Yakin (50 %)</button>
-                <button class="btn btn-outline-primary" wire:click="updateCurrentCertaintyFactor(0.3)">Tidak Tahu (30 %)</button>
-                <button class="btn btn-outline-primary" wire:click="updateCurrentCertaintyFactor(0)">Tidak (0 %)</button>
-            </div>
-                @else
+            </x-card>
+        </div>
 
-                <p class="text-danger">Pilih tingkat keyakinan terlebih dahulu untuk melanjutkan.</p>
-
-
-                @endif
-
-
-            <div class="text-end">
-            </div>
-
-        </x-card>
     </div>
-
-    </div>
-
-
 
 </div>
-
-
-
-
-
-
-
-
-
-

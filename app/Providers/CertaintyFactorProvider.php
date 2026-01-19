@@ -24,7 +24,8 @@ class CertaintyFactorProvider extends ServiceProvider
      * - Gabungkan CF gejala-gejala yang sama pada penyakit yang sama.
      * - Kembalikan penyakit dengan nilai CF tertinggi.
      */
-    public static function diagnosis(array $ceraintyFactorUser): array {
+    public static function diagnosis(array $ceraintyFactorUser): array
+    {
 
         $penyakitAll = Penyakit::with('gejala')->get();
 
@@ -107,7 +108,7 @@ class CertaintyFactorProvider extends ServiceProvider
      * @param float $cf1
      * @param float $cf2
      * @return float
-    */
+     */
     public static function combine(float $cf1, float $cf2): float
     {
         $cf = $cf1 + $cf2 * (1 - abs($cf1));

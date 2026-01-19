@@ -15,6 +15,9 @@ class PenyakitForm extends Form
 
     public string $kode = '';
 
+    #[Validate('required|in:hama,penyakit')]
+    public string $tipe = 'penyakit';
+
     #[Validate('required')]
     public $nama = '';
 
@@ -30,12 +33,13 @@ class PenyakitForm extends Form
         return [
             'kode' => [
                 'required',
-                 Rule::unique('penyakit', 'kode')->ignore($this->penyakit?->id),
+                Rule::unique('penyakit', 'kode')->ignore($this->penyakit?->id),
             ],
         ];
     }
 
-    protected function messages(): array {
+    protected function messages(): array
+    {
         return [
             'kode.unique' => 'Kode penyakit telah digunakan',
             'kode.required' => 'Kode penyakit belum ada',
@@ -43,20 +47,23 @@ class PenyakitForm extends Form
         ];
     }
 
-    public function store() {
+    public function store()
+    {
 
         Penyakit::create($this->validate());
 
         $this->reset();
     }
 
-    public function update() {
+    public function update()
+    {
 
         $this->penyakit->update($this->validate());
         $this->reset();
     }
 
-    public function delete() {
+    public function delete()
+    {
         $this->penyakit->delete();
         $this->reset();
     }

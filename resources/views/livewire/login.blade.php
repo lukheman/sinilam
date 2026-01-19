@@ -8,11 +8,9 @@
 
                     <form wire:submit="login">
                         <x-input model="email" label="Email" type="email" placeholder="Masukkan email"
-                :description="$errors->has('email') ? $errors->first('email') : null"
- />
+                            :description="$errors->has('email') ? $errors->first('email') : null" />
                         <x-input model="password" label="Password" type="password" placeholder="Masukkan password"
-                :description="$errors->has('password') ? $errors->first('password') : null"
- />
+                            :description="$errors->has('password') ? $errors->first('password') : null" />
                         <button type="submit" class="btn btn-primary">Masuk</button>
                     </form>
                 </div>

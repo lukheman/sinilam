@@ -28,9 +28,12 @@ class GejalaPage extends Component
     public GejalaForm $form;
 
     #[Computed]
-    public function modalTitle() {
-        if ($this->formModalState === 'create') return 'Tambah Data';
-        if ($this->formModalState === 'edit') return 'Edit Data';
+    public function modalTitle()
+    {
+        if ($this->formModalState === 'create')
+            return 'Tambah Data';
+        if ($this->formModalState === 'edit')
+            return 'Edit Data';
     }
 
     public function render()
@@ -38,7 +41,8 @@ class GejalaPage extends Component
         return view('livewire.gejala-page');
     }
 
-    public function edit($gejala) {
+    public function edit($gejala)
+    {
 
         $this->form->kode = $gejala['kode'];
         $this->form->nama = $gejala['nama'];
@@ -49,36 +53,65 @@ class GejalaPage extends Component
 
     }
 
-    public function clear() {
-        $this->form->reset();
-        $this->formModalState = 'create';
+    /**
+     * Generate kode gejala berikutnya secara otomatis.
+     * Contoh: G1, G2, G3, ... G9, G10, dst.
+     */
+    public function generateNextKode(): string
+    {
+        // Ambil kode terakhir berdasarkan urutan
+        $lastGejala = Gejala::orderByRaw('CAST(SUBSTRING(kode, 2) AS UNSIGNED) DESC')->first();
+
+        if (!$lastGejala) {
+            return 'G1';
+        }
+
+        // Extract nomor dari kode (misal: G8 -> 8)
+        $lastNumber = (int) substr($lastGejala->kode, 1);
+        $nextNumber = $lastNumber + 1;
+
+        return 'G' . $nextNumber;
     }
 
-    public function save() {
+    public function clear()
+    {
+        $this->form->reset();
+        $this->formModalState = 'create';
+
+        // Set kode otomatis untuk gejala baru
+        $this->form->kode = $this->generateNextKode();
+    }
+
+    public function save()
+    {
         $this->form->store();
         $this->dispatch('close-modal', target: 'modal-form-gejala');
         $this->notifySuccess('Berhasil menambahkan gejala baru');
     }
 
-    public function update() {
+    public function update()
+    {
         $this->form->update();
         $this->dispatch('close-modal', target: 'modal-form-gejala');
         $this->notifySuccess('Berhasil memperbarui gejala');
     }
 
-    public function delete($id) {
+    public function delete($id)
+    {
         $this->form->gejala = Gejala::find($id);
         $this->deleteConfirmation('Yakin untuk menghapus data gejala ini ?');
     }
 
     #[On('deleteConfirmed')]
-    public function deleteConfirmed() {
+    public function deleteConfirmed()
+    {
         $this->notifySuccess("Berhasil menghapus gejala: {$this->form->gejala->kode} - {$this->form->gejala->nama}");
         $this->form->delete();
     }
 
     #[Computed]
-    public function gejala() {
+    public function gejala()
+    {
 
         return Gejala::paginate(10);
 

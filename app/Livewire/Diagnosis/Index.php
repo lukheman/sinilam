@@ -6,7 +6,6 @@ use App\Models\Gejala;
 use App\Providers\CertaintyFactorProvider;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Layout;
-use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Livewire\Attributes\Title;
 
@@ -14,58 +13,82 @@ use Livewire\Attributes\Title;
 #[Layout('layouts.guest')]
 class Index extends Component
 {
-    public ?Gejala $currentGejala = null;
-
-    #[Validate('required')]
-    public ?float $currentCeraintyFactor = null;
-
+    /**
+     * Array untuk menyimpan certainty factor dari setiap gejala.
+     * Key = gejala_id, Value = certainty factor (0 - 1)
+     */
     public array $certaintyFactorUser = [];
 
     public $showHasil = false;
 
+    /**
+     * Pilihan tingkat keyakinan user
+     */
+    public array $certaintyOptions = [
+        '' => '-- Pilih Tingkat Keyakinan --',
+        '1' => 'Sangat Yakin (100%)',
+        '0.8' => 'Yakin (80%)',
+        '0.7' => 'Cukup Yakin (70%)',
+        '0.5' => 'Sedikit Yakin (50%)',
+        '0.3' => 'Tidak Tahu (30%)',
+        '0' => 'Tidak (0%)',
+    ];
+
     #[Computed]
-    public function gejala() {
+    public function gejala()
+    {
         return Gejala::all();
     }
 
-    public function setCeraintyFactor()
+    /**
+     * Inisialisasi certainty factor untuk semua gejala dengan nilai kosong
+     */
+    public function mount()
     {
-        $this->certaintyFactorUser[$this->currentGejala->id] = $this->currentCeraintyFactor;
-    }
-
-    public function updateCurrentCertaintyFactor(float $value)
-    {
-        $this->currentCeraintyFactor = $value;
-        $this->nextGejala();
-    }
-
-
-    public function nextGejala()
-    {
-        $this->validate();
-        $this->setCeraintyFactor();
-        $this->reset('currentCeraintyFactor');
-
-        $gejala = Gejala::where('id', '>', $this->currentGejala->id)->first();
-        if ($gejala) {
-            $this->currentGejala = $gejala;
-        } else {
-            // gejala terakhir, lakukan diagnosis dengan Certainty Factor
-            $this->startDiagnosis();
+        // Inisialisasi semua gejala dengan nilai null/kosong
+        foreach ($this->gejala as $gejala) {
+            $this->certaintyFactorUser[$gejala->id] = '';
         }
     }
 
-    public function startDiagnosis() {
+    /**
+     * Validasi dan mulai diagnosis
+     */
+    public function startDiagnosis()
+    {
+        // Filter hanya gejala yang dipilih (bukan string kosong)
+        $selectedGejala = array_filter($this->certaintyFactorUser, function ($value) {
+            return $value !== '' && $value !== null;
+        });
 
-        $diagnosa = CertaintyFactorProvider::diagnosis( $this->certaintyFactorUser);
+        // Validasi: minimal harus ada 1 gejala yang dipilih
+        if (empty($selectedGejala)) {
+            $this->addError('gejala', 'Pilih minimal satu gejala untuk melakukan diagnosis.');
+            return;
+        }
+
+        // Convert string ke float
+        $certaintyFactors = [];
+        foreach ($selectedGejala as $gejalaId => $value) {
+            $certaintyFactors[$gejalaId] = (float) $value;
+        }
+
+        $diagnosa = CertaintyFactorProvider::diagnosis($certaintyFactors);
         $this->dispatch('showHasil', $diagnosa);
         $this->showHasil = true;
-
     }
 
-    public function mount()
+    /**
+     * Reset form dan mulai ulang diagnosis
+     */
+    public function resetDiagnosis()
     {
-        $this->currentGejala = Gejala::first();
+        $this->showHasil = false;
+        $this->resetErrorBag();
+
+        foreach ($this->gejala as $gejala) {
+            $this->certaintyFactorUser[$gejala->id] = '';
+        }
     }
 
     public function render()
