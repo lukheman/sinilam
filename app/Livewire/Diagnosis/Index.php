@@ -22,6 +22,12 @@ class Index extends Component
     public $showHasil = false;
 
     /**
+     * Tipe diagnosis yang dipilih: 'penyakit' atau 'hama'
+     * Null berarti belum memilih
+     */
+    public ?string $selectedType = null;
+
+    /**
      * Pilihan tingkat keyakinan user
      */
     public array $certaintyOptions = [
@@ -89,6 +95,23 @@ class Index extends Component
         foreach ($this->gejala as $gejala) {
             $this->certaintyFactorUser[$gejala->id] = '';
         }
+    }
+
+    /**
+     * Pilih tipe diagnosis
+     */
+    public function selectType(string $type): void
+    {
+        $this->selectedType = $type;
+    }
+
+    /**
+     * Kembali ke pilihan tipe
+     */
+    public function backToTypeSelection(): void
+    {
+        $this->selectedType = null;
+        $this->resetDiagnosis();
     }
 
     public function render()
