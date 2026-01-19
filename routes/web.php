@@ -21,4 +21,5 @@ Route::middleware(['auth'])->group(function () {
 
 
 Route::get('/login', \App\Livewire\Login::class)->middleware('guest')->name('login');
+Route::get('/register', \App\Livewire\Register::class)->middleware('guest')->name('register');
 Route::get('/diagnosis', \App\Livewire\Diagnosis\Index::class)->name('diagnosis');
