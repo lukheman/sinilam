@@ -12,7 +12,7 @@
         @if (!$selectedType && !$showHasil)
             <div class="text-center mb-4">
                 <h2 class="section-title">Pilih Jenis Diagnosis</h2>
-                <p class="text-muted">Silakan pilih jenis masalah yang ingin Anda diagnosis pada tanaman kelapa sawit.</p>
+                <p class="text-muted">Silakan pilih jenis masalah yang ingin Anda diagnosis pada tanaman nilam.</p>
             </div>
 
             <div class="row g-4 justify-content-center">
@@ -28,7 +28,7 @@
                             </div>
                             <h3 class="card-title mb-3">Penyakit</h3>
                             <p class="card-text text-muted">
-                                Diagnosis penyakit pada tanaman kelapa sawit seperti Ganoderma, Tajuk, dan lainnya.
+                                Diagnosis penyakit pada tanaman nilam seperti Ganoderma, Tajuk, dan lainnya.
                             </p>
                             <button class="btn btn-outline-danger mt-3">
                                 <i class="fas fa-arrow-right me-2"></i>Pilih Penyakit
@@ -49,7 +49,7 @@
                             </div>
                             <h3 class="card-title mb-3">Hama</h3>
                             <p class="card-text text-muted">
-                                Diagnosis hama pada tanaman kelapa sawit seperti ulat, kumbang, dan serangga lainnya.
+                                Diagnosis hama pada tanaman nilam seperti ulat, kumbang, dan serangga lainnya.
                             </p>
                             <button class="btn btn-outline-warning mt-3">
                                 <i class="fas fa-arrow-right me-2"></i>Pilih Hama

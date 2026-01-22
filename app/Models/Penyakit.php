@@ -19,4 +19,8 @@ class Penyakit extends Model
         // mb = measure belif
         // md = measure disbelief
     }
+
+    public static function where(string $string, string $string2)
+    {
+    }
 }
