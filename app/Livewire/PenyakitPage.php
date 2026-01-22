@@ -39,17 +39,17 @@ class PenyakitPage extends Component
     #[Computed]
     public function penyakit()
     {
-        return Penyakit::where('tipe', 'penyakit')->paginate(10, ['*'], 'penyakitPage');
+        return Penyakit::query()->where('tipe', 'penyakit')->paginate(10, ['*'], 'penyakitPage');
     }
 
     #[Computed]
     public function hama()
     {
-        return Penyakit::where('tipe', 'hama')->paginate(10, ['*'], 'hamaPage');
+        return Penyakit::query()->where('tipe', 'hama')->paginate(10, ['*'], 'hamaPage');
     }
 
     #[Computed]
-    public function modalTitle()
+    public function modalTitle(): string
     {
         if ($this->formModalState === 'create')
             return 'Tambah Data';
@@ -59,7 +59,7 @@ class PenyakitPage extends Component
             return 'Detail Data';
     }
 
-    public function clear()
+    public function clear(): void
     {
         $this->form->reset();
         $this->formModalState = 'create';
@@ -68,7 +68,7 @@ class PenyakitPage extends Component
         $this->form->tipe = $this->activeTab;
     }
 
-    public function detail($penyakit)
+    public function detail($penyakit): void
     {
         $this->formModalState = 'detail';
 
