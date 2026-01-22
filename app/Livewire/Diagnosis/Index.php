@@ -32,17 +32,23 @@ class Index extends Component
      */
     public array $certaintyOptions = [
         '' => '-- Pilih Tingkat Keyakinan --',
-        '1' => 'Sangat Yakin (100%)',
-        '0.8' => 'Yakin (80%)',
-        '0.7' => 'Cukup Yakin (70%)',
-        '0.5' => 'Sedikit Yakin (50%)',
-        '0.3' => 'Tidak Tahu (30%)',
-        '0' => 'Tidak (0%)',
+        '1' => 'Sangat Yakin=1',
+        '0.8' => 'Yakin=0.8',
+        '0.7' => 'Cukup Yakin=0.6',
+        '0.4' => 'Sedikit Yakin=0.4',
+        '0' => 'Tidak=0',
     ];
 
     #[Computed]
     public function gejala()
     {
+        if ($this->selectedType) {
+            // Filter gejala berdasarkan tipe penyakit yang dipilih
+            return Gejala::whereHas('penyakit', function ($query) {
+                $query->where('tipe', $this->selectedType);
+            })->get();
+        }
+
         return Gejala::all();
     }
 
