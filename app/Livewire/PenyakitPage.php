@@ -66,6 +66,44 @@ class PenyakitPage extends Component
 
         // Set tipe otomatis berdasarkan tab yang aktif
         $this->form->tipe = $this->activeTab;
+
+        // Generate kode otomatis
+        $this->form->kode = $this->generateKode();
+    }
+
+    /**
+     * Generate kode penyakit otomatis berdasarkan kode terakhir.
+     * Contoh: P01 -> P02, P1 -> P2, P09 -> P10
+     */
+    protected function generateKode(): string
+    {
+        // Ambil kode terakhir berdasarkan tipe (hama/penyakit)
+        $lastPenyakit = Penyakit::query()
+            ->where('tipe', $this->activeTab)
+            ->orderByRaw('LENGTH(kode) DESC, kode DESC')
+            ->first();
+
+        if (!$lastPenyakit) {
+            // Jika belum ada data, mulai dari P01
+            return 'P01';
+        }
+
+        $lastKode = $lastPenyakit->kode;
+
+        // Pisahkan prefix huruf dan angka
+        // Contoh: P01 -> prefix = P, number = 01
+        if (preg_match('/^([A-Za-z]+)(\d+)$/', $lastKode, $matches)) {
+            $prefix = $matches[1];
+            $number = $matches[2];
+            $length = strlen($number); // Panjang digit (untuk padding)
+            $nextNumber = (int) $number + 1;
+
+            // Format dengan padding yang sama
+            return $prefix . str_pad($nextNumber, $length, '0', STR_PAD_LEFT);
+        }
+
+        // Fallback jika format tidak sesuai
+        return 'P01';
     }
 
     public function detail($penyakit): void
