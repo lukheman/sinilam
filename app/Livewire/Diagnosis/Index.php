@@ -34,7 +34,7 @@ class Index extends Component
         '' => '-- Pilih Tingkat Keyakinan --',
         '1' => 'Sangat Yakin=1',
         '0.8' => 'Yakin=0.8',
-        '0.7' => 'Cukup Yakin=0.6',
+        '0.6' => 'Cukup Yakin=0.6',
         '0.4' => 'Sedikit Yakin=0.4',
         '0' => 'Tidak=0',
     ];
