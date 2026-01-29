@@ -65,14 +65,13 @@
 
                             <div class="form-group mb-3">
                                 <label class="form-label">MB (Measure of Belief)</label>
-                                <input type="number" class="form-control" wire:model.live.debounce.1000ms="mb" min="0" max="1"
+                                <input type="number" class="form-control" wire:model="mb" min="0" max="1"
                                     step="0.00001" required>
                             </div>
 
                             <div class="form-group mb-3">
                                 <label class="form-label">MD (Measure of Disbelief)</label>
-                                <input type="number" class="form-control" wire:model="md" min="0" max="1" step="0.00001"
-                                    readonly>
+                                <input type="number" class="form-control" wire:model="md" min="0" max="1" step="0.00001" >
                             </div>
 
                             <x-button type="submit" class="float-end mt-2">Simpan</x-button>
