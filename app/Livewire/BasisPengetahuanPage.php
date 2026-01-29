@@ -32,6 +32,22 @@ class BasisPengetahuanPage extends Component
     public $mb = 0;
     public $md = 0;
 
+    /**
+     * Hook yang dipanggil ketika nilai MB berubah.
+     * Otomatis menghitung MD = 1 - MB.
+     */
+    public function updatedMb($value): void
+    {
+        // Cast ke float, jika kosong atau invalid jadi 0
+        $mbValue = is_numeric($value) ? (float) $value : 0;
+
+        // Memastikan mb dalam range 0-1
+        $this->mb = max(0, min(1, $mbValue));
+
+        // Otomatis hitung md agar mb + md = 1
+        $this->md = round(1 - $this->mb, 5);
+    }
+
     public function saveGejalaPenyakit()
     {
         // Validasi: pastikan gejala sudah dipilih
