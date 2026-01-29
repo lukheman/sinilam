@@ -71,9 +71,7 @@
 
                             <div class="form-group mb-3">
                                 <label class="form-label">MD (Measure of Disbelief)</label>
-                                <input type="number" class="form-control" wire:model="md" min="0" max="1" step="0.00001"
-                                    readonly>
-                                <small class="text-muted">MD dihitung otomatis: MD = 1 - MB</small>
+                                <input type="number" class="form-control" wire:model="md" min="0" max="1" step="0.00001" >
                             </div>
 
                             <x-button type="submit" class="float-end mt-2">Simpan</x-button>
