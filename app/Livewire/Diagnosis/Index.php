@@ -36,7 +36,7 @@ class Index extends Component
         '0.8' => 'Yakin=0.8',
         '0.6' => 'Cukup Yakin=0.6',
         '0.4' => 'Sedikit Yakin=0.4',
-        '0' => 'Tidak=0',
+        '0.2' => 'Tidak Tahu=0.2',
     ];
 
     #[Computed]
